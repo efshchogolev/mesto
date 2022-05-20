@@ -6,4 +6,6 @@
   "name edit"
   "about .";
   align-items: center;
+  align-content: end;
+  margin-top: 22px;
 }
