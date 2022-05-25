@@ -1,6 +1,6 @@
 .profile__info {
   display: grid;
-  gap: 16px 18px;
+  gap: 8px 18px;
   max-width: 336px;
   grid-template-areas:
   "name edit"
@@ -8,4 +8,15 @@
   align-items: center;
   align-content: end;
   margin-top: 22px;
+  align-self: flex-start;
+}
+
+@media screen and (max-width: 797px) {
+  .profile__info{
+    grid-template-areas:
+    "name edit"
+    "about about";
+    text-align: center;
+    margin: 29px auto 0 auto;
+  }
 }

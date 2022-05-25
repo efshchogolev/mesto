@@ -1,3 +1,5 @@
 .place__image-container {
   overflow: hidden;
+  max-width: 282px;
+  min-height: 282px;
 }

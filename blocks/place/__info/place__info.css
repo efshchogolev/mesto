@@ -1,4 +1,6 @@
 .place__info {
   display: flex;
-  margin: 25px 15px 31px 21px;
+  margin: 25px 0 31px;
+  align-items: center;
+  justify-content: space-between;
 }
