@@ -1,4 +1,9 @@
 .place__like-button {
-  max-width: 24px;
   margin-left: auto;
+  background: url(../../../images/Like.svg);
+  background-size: 24px 24px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
 }

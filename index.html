@@ -16,10 +16,10 @@
             <img src="./images/Avatar.jpg" class="profile__avatar">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <img src="./images/Edit_button.svg" class="profile__edit-button">
+                <button class="profile__edit-button"></button>
                 <h2 class="profile__about">Исследователь океана</h2>
             </div>
-            <img src="./images/Add_button.png" class="profile__add-button">
+            <button class="profile__add-button"></button>
         </section>
         <section class="elements">
           <div class="place">
@@ -28,7 +28,7 @@
             </div>
             <div class="place__info">
               <h2 class="place__name">Карачаевск</h2>
-              <img src="./images/Like.svg" class="place__like-button">
+              <button class="place__like-button"></button>
             </div>
           </div>
           <div class="place">
@@ -37,7 +37,7 @@
             </div>
             <div class="place__info">
               <h2 class="place__name">Домбай</h2>
-              <img src="./images/Like.svg" class="place__like-button">
+              <button class="place__like-button"></button>
             </div>
           </div>
           <div class="place">
@@ -46,7 +46,7 @@
             </div>
             <div class="place__info">
               <h2 class="place__name">Гора Эльбрус</h2>
-              <img src="./images/Like.svg" class="place__like-button">
+              <button class="place__like-button"></button>
             </div>
           </div>
           <div class="place">
@@ -55,7 +55,7 @@
             </div>
             <div class="place__info">
               <h2 class="place__name">Байкал</h2>
-              <img src="./images/Like.svg" class="place__like-button">
+              <button class="place__like-button"></button>
             </div>
           </div>
           <div class="place">
@@ -64,7 +64,7 @@
             </div>
             <div class="place__info">
               <h2 class="place__name">Гора Казбек</h2>
-              <img src="./images/Like.svg" class="place__like-button">
+              <button class="place__like-button"></button>
             </div>
           </div>
           <div class="place">
@@ -73,13 +73,24 @@
             </div>
             <div class="place__info">
               <h2 class="place__name">Алтай</h2>
-              <img src="./images/Like.svg" class="place__like-button">
+              <button class="place__like-button"></button>
             </div>
           </div>
         </section>
         <footer class="footer">
           <h2 class="footer__copyright">&copy; 2022 Mesto Russia</h2>
         </footer>
+        <div class="popup">
+          <div class="popup__container">
+            <button class="popup__close-button"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form">
+              <input type="text" class="popup__input popup__input_name">
+              <input type="text" class="popup__input popup__input_about">
+              <button type="submit" class="popup__submit-button">Сохранить</button>
+            </form>
+          </div>
+        </div>
     </div>
 </body>
 </html>
