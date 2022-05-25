@@ -1,6 +1,7 @@
 .place__info {
   display: flex;
-  margin: 25px 0 31px;
+  padding: 25px 0 31px;
   align-items: center;
   justify-content: space-between;
+  background-color: #fff;
 }
