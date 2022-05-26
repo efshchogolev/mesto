@@ -18,5 +18,6 @@
     "about about";
     text-align: center;
     margin: 29px auto 0 auto;
+    max-width: 282px;
   }
 }
