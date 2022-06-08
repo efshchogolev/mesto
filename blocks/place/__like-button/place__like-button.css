@@ -10,6 +10,7 @@
   padding: 0;
   margin-left: auto;
   margin-right: 20px;
+  flex-shrink: 0;
 }
 
 .place__like-button:hover {
