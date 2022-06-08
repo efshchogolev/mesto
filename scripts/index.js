@@ -1,16 +1,18 @@
-const editBtn = document.querySelector('.profile__edit-button')
-const popup = document.querySelector('.popup')
-const closeBtn = document.querySelector('.popup__close-button')
-const saveBtn = document.querySelector('.popup__submit-button')
+const editBtn = document.querySelector('.profile__edit-button');
+const popupEdit = document.querySelector('#popup_edit');
+const closeEditBtn = document.querySelector('#close_edit');
 
-const firstname = document.querySelector('.profile__name')
-const nameInput = document.querySelector('.popup__input_name')
-const about = document.querySelector('.profile__about')
-const aboutInput = document.querySelector('.popup__input_about')
-const form = document.querySelector('.popup__form')
+const firstname = document.querySelector('.profile__name');
+const nameInput = document.querySelector('.popup__input_name');
+const about = document.querySelector('.profile__about');
+const aboutInput = document.querySelector('.popup__input_about');
+const formEdit = document.querySelector('#form_edit');
 
-console.log(editBtn)
-console.log(popup)
+const addBtn = document.querySelector('.profile__add-button');
+const popupAdd = document.querySelector('#popup_add');
+const closeAddBtn = document.querySelector('#close_add')
+const formAdd = document.querySelector('#form_add')
+
 
 function closePopup (popupElement) {
   popupElement.classList.remove('popup_isOpen');
@@ -22,19 +24,37 @@ function openPopup (popupElement) {
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  closePopup (popup);
+  closePopup (popupEdit);
   firstname.textContent = nameInput.value;
   about.textContent = aboutInput.value
 };
 
 editBtn.addEventListener('click', function() {
-  openPopup (popup);
+  openPopup (popupEdit);
   nameInput.value = firstname.textContent;
   aboutInput.value = about.textContent;
 })
 
-closeBtn.addEventListener('click', function() {
-  closePopup (popup);
+closeEditBtn.addEventListener('click', function() {
+  closePopup (popupEdit);
 });
 
-form.addEventListener('submit', formSubmitHandler);
+formEdit.addEventListener('submit', formSubmitHandler);
+
+
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+  closePopup (popupAdd);
+  // firstname.textContent = nameInput.value;
+  // about.textContent = aboutInput.value
+};
+
+addBtn.addEventListener('click', function() {
+  openPopup (popupAdd);
+})
+
+closeAddBtn.addEventListener('click', function() {
+  closePopup (popupAdd);
+});
+
+formAdd.addEventListener('submit', formSubmitHandler);
