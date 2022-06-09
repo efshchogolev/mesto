@@ -12,3 +12,7 @@
   cursor: pointer;
   padding: 0
 }
+
+.place__delete-button:hover {
+  opacity: .6;
+}

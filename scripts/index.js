@@ -92,10 +92,16 @@ const placesListElement = document.querySelector('.elements');
 const placeNameInputElement = document.querySelector('.popup__input_place');
 const placeImgLinkElement = document.querySelector('.popup__input_link');
 
+const getPlaceByEvent = e => e.currentTarget.closest('.place')
+
 const createPlace = (placeName, placeLink) => {
   const place = placeTemplateElement.content.cloneNode(true).querySelector('.place');
   place.querySelector('.place__name').textContent = placeName;
   place.querySelector('.place__image').setAttribute('src', placeLink);
+  place.querySelector('.place__delete-button').addEventListener('click', e => {
+    const place = getPlaceByEvent (e);
+    place.remove();
+  })
   return place;
 }
 
@@ -123,3 +129,4 @@ for (let i=0; i < initialCards.length; i++) {
 }
 
 formAdd.addEventListener('submit', placeSubmitHandler);
+
