@@ -10,7 +10,8 @@
   height: 19px;
   border: none;
   cursor: pointer;
-  padding: 0
+  padding: 0;
+  transition: opacity .3s ease-in-out;
 }
 
 .place__delete-button:hover {

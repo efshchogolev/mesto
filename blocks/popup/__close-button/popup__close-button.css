@@ -5,7 +5,7 @@
   height: 32px;
   border: none;
   position: absolute;
-
+  transition: opacity .3s ease-in-out;
   top: -40px;
   right: -40px;
   cursor: pointer;

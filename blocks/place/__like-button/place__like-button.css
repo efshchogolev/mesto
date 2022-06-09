@@ -11,6 +11,8 @@
   margin-left: auto;
   margin-right: 20px;
   flex-shrink: 0;
+  transition: opacity .3s ease-in-out;
+
 }
 
 .place__like-button:hover {
