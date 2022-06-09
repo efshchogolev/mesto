@@ -1,3 +1,31 @@
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 const editBtn = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('#popup_edit');
 const closeEditBtn = document.querySelector('#close_edit');
@@ -58,3 +86,36 @@ closeAddBtn.addEventListener('click', function() {
 });
 
 formAdd.addEventListener('submit', formSubmitHandler);
+
+const placeTemplateElement = document.querySelector('.place-template');
+const placesListElement = document.querySelector('.elements');
+const placeNameInputElement = document.querySelector('.popup__input_place');
+const placeImgLinkElement = document.querySelector('.popup__input_link');
+
+const createPlace = (placeName, placeLink) => {
+  const place = placeTemplateElement.content.cloneNode(true).querySelector('.place');
+  place.querySelector('.place__name').textContent = placeName;
+  place.querySelector('.place__image').setAttribute('src', placeLink);
+  return place;
+}
+
+const addPlace = (placeName, placeLink) => {
+  const place = createPlace(placeName, placeLink);
+
+  placesListElement.prepend(place);
+}
+
+const placeSubmitHandler = evt => {
+  evt.preventDefault();
+
+  const placeName = placeNameInputElement.value;
+  const placeLink = placeImgLinkElement.value;
+
+  addPlace(placeName, placeLink);
+
+  formAdd.reset();
+}
+
+initialCards.forEach(addPlace);
+
+formAdd.addEventListener('submit', placeSubmitHandler);
