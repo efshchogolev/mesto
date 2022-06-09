@@ -73,8 +73,6 @@ formEdit.addEventListener('submit', formSubmitHandler);
 function formSubmitHandler (evt) {
   evt.preventDefault();
   closePopup (popupAdd);
-  // firstname.textContent = nameInput.value;
-  // about.textContent = aboutInput.value
 };
 
 addBtn.addEventListener('click', function() {
@@ -102,6 +100,9 @@ const createPlace = (placeName, placeLink) => {
     const place = getPlaceByEvent (e);
     place.remove();
   })
+  place.querySelector('.place__like-button').addEventListener('click', e => {
+    e.target.classList.toggle('place__like-button_active');
+  });
   return place;
 }
 
