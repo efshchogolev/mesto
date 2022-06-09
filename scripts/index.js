@@ -116,6 +116,10 @@ const placeSubmitHandler = evt => {
   formAdd.reset();
 }
 
-initialCards.forEach(addPlace);
+for (let i=0; i < initialCards.length; i++) {
+  const placeName = initialCards[i].name;
+  const placeLink = initialCards[i].link;
+  addPlace(placeName,placeLink);
+}
 
 formAdd.addEventListener('submit', placeSubmitHandler);
