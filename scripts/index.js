@@ -91,11 +91,9 @@ const createPlace = (placeName, placeLink) => {
   place.querySelector('.place__like-button').addEventListener('click', e => {
     e.target.classList.toggle('place__like-button_active');
   });
-  const popupPlaceName = placeName;
-  const popupPlaceLink = placeLink;
   const placeImageElement = place.querySelector('.place__image');
   placeImageElement.addEventListener('click', () => {
-    openPlacePopup(popupPlaceName, popupPlaceLink);
+    openPlacePopup(placeName, placeLink);
   });
   return place;
 }
