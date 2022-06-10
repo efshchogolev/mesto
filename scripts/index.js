@@ -41,6 +41,10 @@ const popupAdd = document.querySelector('#popup_add');
 const closeAddBtn = document.querySelector('#close_add')
 const formAdd = document.querySelector('#form_add')
 
+const placeTemplateElement = document.querySelector('.place-template');
+const placesListElement = document.querySelector('.elements');
+const placeNameInputElement = document.querySelector('.popup__input_place');
+const placeImgLinkElement = document.querySelector('.popup__input_link');
 
 function closePopup (popupElement) {
   popupElement.classList.remove('popup_isOpen');
@@ -50,7 +54,7 @@ function openPopup (popupElement) {
   popupElement.classList.add('popup_isOpen');
 }
 
-function formSubmitHandler (evt) {
+function formEditSubmitHandler (evt) {
   evt.preventDefault();
   closePopup (popupEdit);
   firstname.textContent = nameInput.value;
@@ -67,10 +71,9 @@ closeEditBtn.addEventListener('click', function() {
   closePopup (popupEdit);
 });
 
-formEdit.addEventListener('submit', formSubmitHandler);
+formEdit.addEventListener('submit', formAddSubmitHandler);
 
-
-function formSubmitHandler (evt) {
+function formAddSubmitHandler (evt) {
   evt.preventDefault();
   closePopup (popupAdd);
 };
@@ -83,28 +86,50 @@ closeAddBtn.addEventListener('click', function() {
   closePopup (popupAdd);
 });
 
-formAdd.addEventListener('submit', formSubmitHandler);
+formAdd.addEventListener('submit', formAddSubmitHandler);
 
-const placeTemplateElement = document.querySelector('.place-template');
-const placesListElement = document.querySelector('.elements');
-const placeNameInputElement = document.querySelector('.popup__input_place');
-const placeImgLinkElement = document.querySelector('.popup__input_link');
+const deletePlace = e => {
+  const place = getPlaceByEvent (e);
+  place.remove();
+}
+
 
 const getPlaceByEvent = e => e.currentTarget.closest('.place')
+
+
+const placePopupElement = document.querySelector('#popup_place')
+// let placePopupName = placePopupElement.querySelector('.popup__place-name');
+// let placePopupLink = placePopupElement.querySelector('.popup__place-image').getAttribute('src')
+
+const openPlacePopup = (placeName, placeLink) => {
+  openPopup(placePopupElement)
+  placePopupElement.querySelector('.popup__place-name').textContent = placeName;
+  placePopupElement.querySelector('.popup__place-image').setAttribute('src', placeLink);
+}
+
+const closeImageBtn = placePopupElement.querySelector('.popup__close-button')
+
+closeImageBtn.addEventListener('click', () => {
+  closePopup(placePopupElement);
+})
 
 const createPlace = (placeName, placeLink) => {
   const place = placeTemplateElement.content.cloneNode(true).querySelector('.place');
   place.querySelector('.place__name').textContent = placeName;
   place.querySelector('.place__image').setAttribute('src', placeLink);
-  place.querySelector('.place__delete-button').addEventListener('click', e => {
-    const place = getPlaceByEvent (e);
-    place.remove();
-  })
+  place.querySelector('.place__delete-button').addEventListener('click', deletePlace)
   place.querySelector('.place__like-button').addEventListener('click', e => {
     e.target.classList.toggle('place__like-button_active');
   });
+  const popupPlaceName = placeName;
+  const popupPlaceLink = placeLink;
+  const placeImageElement = place.querySelector('.place__image');
+  placeImageElement.addEventListener('click', () => {
+    openPlacePopup(popupPlaceName, popupPlaceLink);
+  });
   return place;
 }
+console.log(placePopupElement)
 
 const addPlace = (placeName, placeLink) => {
   const place = createPlace(placeName, placeLink);
@@ -123,11 +148,12 @@ const placeSubmitHandler = evt => {
   formAdd.reset();
 }
 
-for (let i=0; i < initialCards.length; i++) {
-  const placeName = initialCards[i].name;
-  const placeLink = initialCards[i].link;
+initialCards.forEach( el => {
+  const placeName = el.name;
+  const placeLink = el.link;
   addPlace(placeName,placeLink);
-}
+})
 
 formAdd.addEventListener('submit', placeSubmitHandler);
+
 
