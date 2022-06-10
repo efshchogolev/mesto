@@ -1,4 +1,3 @@
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -46,6 +45,10 @@ const placesListElement = document.querySelector('.elements');
 const placeNameInputElement = document.querySelector('.popup__input_place');
 const placeImgLinkElement = document.querySelector('.popup__input_link');
 
+const placePopupElement = document.querySelector('#popup_place')
+const closeImageBtn = placePopupElement.querySelector('.popup__close-button')
+
+
 function closePopup (popupElement) {
   popupElement.classList.remove('popup_isOpen');
 }
@@ -61,56 +64,24 @@ function formEditSubmitHandler (evt) {
   about.textContent = aboutInput.value
 };
 
-editBtn.addEventListener('click', function() {
-  openPopup (popupEdit);
-  nameInput.value = firstname.textContent;
-  aboutInput.value = about.textContent;
-})
-
-closeEditBtn.addEventListener('click', function() {
-  closePopup (popupEdit);
-});
-
-
-
-function formAddSubmitHandler (evt) {
+const placeSubmitHandler = evt => {
   evt.preventDefault();
-  closePopup (popupAdd);
-};
 
-addBtn.addEventListener('click', function() {
-  openPopup (popupAdd);
-})
+  const placeName = placeNameInputElement.value;
+  const placeLink = placeImgLinkElement.value;
 
-closeAddBtn.addEventListener('click', function() {
+  addPlace(placeName, placeLink);
+
+  formAdd.reset();
   closePopup (popupAdd);
-});
+}
+
 
 
 const deletePlace = e => {
   const place = getPlaceByEvent (e);
   place.remove();
 }
-
-
-const getPlaceByEvent = e => e.currentTarget.closest('.place')
-
-
-const placePopupElement = document.querySelector('#popup_place')
-// let placePopupName = placePopupElement.querySelector('.popup__place-name');
-// let placePopupLink = placePopupElement.querySelector('.popup__place-image').getAttribute('src')
-
-const openPlacePopup = (placeName, placeLink) => {
-  openPopup(placePopupElement)
-  placePopupElement.querySelector('.popup__place-name').textContent = placeName;
-  placePopupElement.querySelector('.popup__place-image').setAttribute('src', placeLink);
-}
-
-const closeImageBtn = placePopupElement.querySelector('.popup__close-button')
-
-closeImageBtn.addEventListener('click', () => {
-  closePopup(placePopupElement);
-})
 
 const createPlace = (placeName, placeLink) => {
   const place = placeTemplateElement.content.cloneNode(true).querySelector('.place');
@@ -136,19 +107,6 @@ const addPlace = (placeName, placeLink) => {
   placesListElement.prepend(place);
 }
 
-const placeSubmitHandler = evt => {
-  evt.preventDefault();
-
-  const placeName = placeNameInputElement.value;
-  const placeLink = placeImgLinkElement.value;
-
-  addPlace(placeName, placeLink);
-
-  formAdd.reset();
-  closePopup (popupAdd);
-}
-
-
 
 initialCards.forEach( el => {
   const placeName = el.name;
@@ -156,6 +114,41 @@ initialCards.forEach( el => {
   addPlace(placeName,placeLink);
 })
 
+
+
+editBtn.addEventListener('click', function() {
+  openPopup (popupEdit);
+  nameInput.value = firstname.textContent;
+  aboutInput.value = about.textContent;
+})
+
+closeEditBtn.addEventListener('click', function() {
+  closePopup (popupEdit);
+});
+
+
+
+addBtn.addEventListener('click', function() {
+  openPopup (popupAdd);
+})
+
+closeAddBtn.addEventListener('click', function() {
+  closePopup (popupAdd);
+});
+
+
+
+const getPlaceByEvent = e => e.currentTarget.closest('.place')
+
+const openPlacePopup = (placeName, placeLink) => {
+  openPopup(placePopupElement)
+  placePopupElement.querySelector('.popup__place-name').textContent = placeName;
+  placePopupElement.querySelector('.popup__place-image').setAttribute('src', placeLink);
+}
+
+closeImageBtn.addEventListener('click', () => {
+  closePopup(placePopupElement);
+})
+
 formAdd.addEventListener('submit', placeSubmitHandler);
 formEdit.addEventListener('submit', formEditSubmitHandler);
-
