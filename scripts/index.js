@@ -29,7 +29,7 @@ const initialCards = [
 const editBtn = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('#popup_edit');
 const closeEditBtn = document.querySelector('#close_edit');
-
+const saveBtn = document.querySelector('.popup__submit-button')
 const firstname = document.querySelector('.profile__name');
 const nameInput = document.querySelector('.popup__input_name');
 const about = document.querySelector('.profile__about');
@@ -71,7 +71,7 @@ closeEditBtn.addEventListener('click', function() {
   closePopup (popupEdit);
 });
 
-formEdit.addEventListener('submit', formAddSubmitHandler);
+
 
 function formAddSubmitHandler (evt) {
   evt.preventDefault();
@@ -86,7 +86,6 @@ closeAddBtn.addEventListener('click', function() {
   closePopup (popupAdd);
 });
 
-formAdd.addEventListener('submit', formAddSubmitHandler);
 
 const deletePlace = e => {
   const place = getPlaceByEvent (e);
@@ -146,7 +145,10 @@ const placeSubmitHandler = evt => {
   addPlace(placeName, placeLink);
 
   formAdd.reset();
+  closePopup (popupAdd);
 }
+
+
 
 initialCards.forEach( el => {
   const placeName = el.name;
@@ -155,5 +157,5 @@ initialCards.forEach( el => {
 })
 
 formAdd.addEventListener('submit', placeSubmitHandler);
-
+formEdit.addEventListener('submit', formEditSubmitHandler);
 
