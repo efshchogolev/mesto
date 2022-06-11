@@ -45,9 +45,10 @@ const placesListElement = document.querySelector('.elements');
 const placeNameInputElement = document.querySelector('.popup__input_place');
 const placeImgLinkElement = document.querySelector('.popup__input_link');
 
-const placePopupElement = document.querySelector('#popup_place')
-const closeImageBtn = placePopupElement.querySelector('.popup__close-button')
-
+const placePopupElement = document.querySelector('#popup_place');
+const closeImageBtn = placePopupElement.querySelector('.popup__close-button');
+const placePopupImageElement = placePopupElement.querySelector('.popup__place-image');
+const placePopupNameElement = placePopupElement.querySelector('.popup__place-name')
 
 function closePopup (popupElement) {
   popupElement.classList.remove('popup_isOpen');
@@ -57,14 +58,14 @@ function openPopup (popupElement) {
   popupElement.classList.add('popup_isOpen');
 }
 
-function formEditSubmitHandler (evt) {
+function handlerFormEditSubmit (evt) {
   evt.preventDefault();
   closePopup (popupEdit);
   firstname.textContent = nameInput.value;
   about.textContent = aboutInput.value
 };
 
-const placeSubmitHandler = evt => {
+const handlerPlaceSugmit = evt => {
   evt.preventDefault();
 
   const placeName = placeNameInputElement.value;
@@ -85,14 +86,14 @@ const deletePlace = e => {
 
 const createPlace = (placeName, placeLink) => {
   const place = placeTemplateElement.content.cloneNode(true).querySelector('.place');
+  const placeImageElement = place.querySelector('.place__image');
   place.querySelector('.place__name').textContent = placeName;
-  place.querySelector('.place__image').setAttribute('src', placeLink);
-  place.querySelector('.place__image').setAttribute('alt',placeName);
+  placeImageElement.setAttribute('src', placeLink);
+  placeImageElement.setAttribute('alt',placeName);
   place.querySelector('.place__delete-button').addEventListener('click', deletePlace);
   place.querySelector('.place__like-button').addEventListener('click', e => {
     e.target.classList.toggle('place__like-button_active');
   });
-  const placeImageElement = place.querySelector('.place__image');
   placeImageElement.addEventListener('click', () => {
     openPlacePopup(placeName, placeLink);
   });
@@ -141,14 +142,14 @@ const getPlaceByEvent = e => e.currentTarget.closest('.place')
 
 const openPlacePopup = (placeName, placeLink) => {
   openPopup(placePopupElement)
-  placePopupElement.querySelector('.popup__place-name').textContent = placeName;
-  placePopupElement.querySelector('.popup__place-image').setAttribute('src', placeLink);
-  placePopupElement.querySelector('.popup__place-image').setAttribute('alt',placeName);
+  placePopupNameElement.textContent = placeName;
+  placePopupImageElement.setAttribute('src', placeLink);
+  placePopupImageElement.setAttribute('alt',placeName);
 }
 
 closeImageBtn.addEventListener('click', () => {
   closePopup(placePopupElement);
 })
 
-formAdd.addEventListener('submit', placeSubmitHandler);
-formEdit.addEventListener('submit', formEditSubmitHandler);
+formAdd.addEventListener('submit', handlerPlaceSugmit);
+formEdit.addEventListener('submit', handlerFormEditSubmit);
