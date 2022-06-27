@@ -48,7 +48,24 @@ const placeImgLinkElement = document.querySelector('.popup__input_link');
 const placePopupElement = document.querySelector('#popup_place');
 const closeImageBtn = placePopupElement.querySelector('.popup__close-button');
 const placePopupImageElement = placePopupElement.querySelector('.popup__place-image');
-const placePopupNameElement = placePopupElement.querySelector('.popup__place-name')
+const placePopupNameElement = placePopupElement.querySelector('.popup__place-name');
+const popups = document.querySelectorAll('.popup')
+
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_isOpen')) {
+            closePopup(popup)
+        }
+    })
+})
+
+const closeByEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_isOpen'))
+  }
+}
+
+document.addEventListener('keydown', closeByEsc);
 
 function closePopup (popupElement) {
   popupElement.classList.remove('popup_isOpen');

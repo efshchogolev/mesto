@@ -37,7 +37,6 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 }
 
-
 const setEventListeners = (formElement, validation) => {
   const inputList = Array.from(formElement.querySelectorAll(validation.inputSelector));
   const buttonElement = formElement.querySelector(validation.submitButtonSelector);
