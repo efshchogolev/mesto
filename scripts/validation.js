@@ -28,14 +28,29 @@ const checkInputValidity = (formElement, inputElement, validation) => {
   }
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
+const deactivateButton = (buttonElement) => {
+  if (buttonElement) {
     buttonElement.disabled = true;
   }
-  else {
+
+}
+
+const activateButton = (buttonElement) => {
+  if (buttonElement) {
     buttonElement.disabled = false;
   }
 }
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    deactivateButton(buttonElement);
+  }
+  else {
+    activateButton(buttonElement);
+  }
+}
+
+
 
 const setEventListeners = (formElement, validation) => {
   const inputList = Array.from(formElement.querySelectorAll(validation.inputSelector));
@@ -52,9 +67,6 @@ const setEventListeners = (formElement, validation) => {
 function enableValidation(validation) {
   const formList = Array.from(document.querySelectorAll(validation.formSelector))
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit',function (evt) {
-      evt.preventDefault();
-    })
      setEventListeners(formElement,validation);
   })
 }
