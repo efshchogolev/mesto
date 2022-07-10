@@ -61,6 +61,7 @@ const config = {
   cardName: ".place__name",
   cardImage: ".place__image",
   cardList: ".elements",
+  cardDeleteButton: ".place__delete-button",
 };
 
 const cardContainer = document.querySelector(config.cardList);
@@ -109,11 +110,6 @@ const handlerPlaceSugmit = (evt) => {
   closePopup(popupAdd);
 };
 
-const deletePlace = (e) => {
-  const place = getPlaceByEvent(e);
-  place.remove();
-};
-
 const createPlace = (placeName, placeLink) => {
   const place = placeTemplateElement.content
     .cloneNode(true)
@@ -139,12 +135,6 @@ const addPlace = (placeName, placeLink) => {
   placesListElement.prepend(place);
 };
 
-// initialCards.forEach((el) => {
-//   const placeName = el.name;
-//   const placeLink = el.link;
-//   addPlace(placeName, placeLink);
-// });
-
 initialCards.forEach((el) => {
   const card = new Card(config, el.name, el.link);
   card.render(cardContainer);
@@ -167,8 +157,6 @@ btnAdd.addEventListener("click", function () {
 btnCloseAdd.addEventListener("click", function () {
   closePopup(popupAdd);
 });
-
-const getPlaceByEvent = (e) => e.currentTarget.closest(".place");
 
 const openPlacePopup = (placeName, placeLink) => {
   openPopup(placePopupElement);
