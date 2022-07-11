@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
 const initialCards = [
   {
@@ -43,10 +44,10 @@ const btnCloseAdd = document.querySelector("#close_add");
 const formAdd = document.querySelector("#form_add");
 
 const placeTemplateElement = document.querySelector(".place-template");
-// const placesListElement = document.querySelector(".elements");
+
 const placeNameInputElement = document.querySelector(".popup__input_place");
 const placeImgLinkElement = document.querySelector(".popup__input_link");
-
+const placesListElement = document.querySelector(".elemetns");
 const placePopupElement = document.querySelector("#popup_place");
 const btnCloseImage = placePopupElement.querySelector(".popup__close-button");
 const placePopupImageElement = placePopupElement.querySelector(
@@ -62,6 +63,15 @@ const config = {
   cardImage: ".place__image",
   cardList: ".elements",
   cardDeleteButton: ".place__delete-button",
+  cardLikeButton: ".place__like-button",
+};
+
+const validation = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit-button",
+  inputErrorClass: "popup__input_error",
+  errorClass: "popup__input-error_active",
 };
 
 const cardContainer = document.querySelector(config.cardList);
@@ -82,7 +92,6 @@ const closeByEsc = (evt) => {
 
 function closePopup(popupElement) {
   popupElement.classList.remove("popup_isOpen");
-  deactivateButton(popupElement.querySelector(".popup__submit-button"));
   document.removeEventListener("keydown", closeByEsc);
 }
 
@@ -98,7 +107,7 @@ function handlerFormEditSubmit(evt) {
   about.textContent = aboutInput.value;
 }
 
-const handlerPlaceSugmit = (evt) => {
+const handlerPlaceSubmit = (evt) => {
   evt.preventDefault();
 
   const placeName = placeNameInputElement.value;
@@ -118,15 +127,6 @@ const createPlace = (placeName, placeLink) => {
   place.querySelector(".place__name").textContent = placeName;
   placeImageElement.setAttribute("src", placeLink);
   placeImageElement.setAttribute("alt", placeName);
-  place
-    .querySelector(".place__delete-button")
-    .addEventListener("click", deletePlace);
-  place.querySelector(".place__like-button").addEventListener("click", (e) => {
-    e.target.classList.toggle("place__like-button_active");
-  });
-  placeImageElement.addEventListener("click", () => {
-    openPlacePopup(placeName, placeLink);
-  });
   return place;
 };
 
@@ -135,8 +135,15 @@ const addPlace = (placeName, placeLink) => {
   placesListElement.prepend(place);
 };
 
+const openPlacePopup = (placeName, placeLink) => {
+  openPopup(placePopupElement);
+  placePopupNameElement.textContent = placeName;
+  placePopupImageElement.setAttribute("src", placeLink);
+  placePopupImageElement.setAttribute("alt", placeName);
+};
+
 initialCards.forEach((el) => {
-  const card = new Card(config, el.name, el.link);
+  const card = new Card(config, el.name, el.link, openPlacePopup);
   card.render(cardContainer);
 });
 
@@ -158,16 +165,14 @@ btnCloseAdd.addEventListener("click", function () {
   closePopup(popupAdd);
 });
 
-const openPlacePopup = (placeName, placeLink) => {
-  openPopup(placePopupElement);
-  placePopupNameElement.textContent = placeName;
-  placePopupImageElement.setAttribute("src", placeLink);
-  placePopupImageElement.setAttribute("alt", placeName);
-};
-
 btnCloseImage.addEventListener("click", () => {
   closePopup(placePopupElement);
 });
 
-formAdd.addEventListener("submit", handlerPlaceSugmit);
+formAdd.addEventListener("submit", handlerPlaceSubmit);
 formEdit.addEventListener("submit", handlerFormEditSubmit);
+
+const formEditValidation = new FormValidator(validation, formEdit);
+formEditValidation.enableValidation();
+const formAddValidation = new FormValidator(validation, formAdd);
+formAddValidation.enableValidation();
