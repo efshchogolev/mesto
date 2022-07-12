@@ -43,7 +43,6 @@ class Card {
     this._placeImage = this._view.querySelector(this._config.cardImage);
     this._placeImage.src = this._image;
     this._placeImage.alt = this._name;
-    // cardsList.append(this._view);
     this._buttonLike = this._view.querySelector(this._config.cardLikeButton);
 
     this._addEventListeners();
