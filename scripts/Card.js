@@ -36,17 +36,19 @@ class Card {
     this._buttonLike.classList.toggle("place__like-button_active");
   }
 
-  render(cardsList) {
+  render() {
     this._view = this._getTemplate();
     this._placeName = this._view.querySelector(this._config.cardName);
     this._placeName.textContent = this._name;
     this._placeImage = this._view.querySelector(this._config.cardImage);
     this._placeImage.src = this._image;
     this._placeImage.alt = this._name;
-    cardsList.append(this._view);
+    // cardsList.append(this._view);
     this._buttonLike = this._view.querySelector(this._config.cardLikeButton);
 
     this._addEventListeners();
+
+    return this._view;
   }
 }
 

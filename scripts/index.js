@@ -47,7 +47,6 @@ const placeTemplateElement = document.querySelector(".place-template");
 
 const placeNameInputElement = document.querySelector(".popup__input_place");
 const placeImgLinkElement = document.querySelector(".popup__input_link");
-const placesListElement = document.querySelector(".elemetns");
 const placePopupElement = document.querySelector("#popup_place");
 const btnCloseImage = placePopupElement.querySelector(".popup__close-button");
 const placePopupImageElement = placePopupElement.querySelector(
@@ -112,27 +111,20 @@ const handlerPlaceSubmit = (evt) => {
 
   const placeName = placeNameInputElement.value;
   const placeLink = placeImgLinkElement.value;
+  const el = {};
+  el.name = placeName;
+  el.link = placeLink;
 
-  addPlace(placeName, placeLink);
+  addPlace(el);
 
   formAdd.reset();
   closePopup(popupAdd);
+  formAddValidation.enableValidation();
 };
 
-const createPlace = (placeName, placeLink) => {
-  const place = placeTemplateElement.content
-    .cloneNode(true)
-    .querySelector(".place");
-  const placeImageElement = place.querySelector(".place__image");
-  place.querySelector(".place__name").textContent = placeName;
-  placeImageElement.setAttribute("src", placeLink);
-  placeImageElement.setAttribute("alt", placeName);
-  return place;
-};
-
-const addPlace = (placeName, placeLink) => {
-  const place = createPlace(placeName, placeLink);
-  placesListElement.prepend(place);
+const addPlace = (el) => {
+  const place = createPlace(el);
+  cardContainer.prepend(place);
 };
 
 const openPlacePopup = (placeName, placeLink) => {
@@ -142,9 +134,14 @@ const openPlacePopup = (placeName, placeLink) => {
   placePopupImageElement.setAttribute("alt", placeName);
 };
 
+const createPlace = (el) => {
+  const place = new Card(config, el.name, el.link, openPlacePopup);
+  const placeElement = place.render();
+  return placeElement;
+};
+
 initialCards.forEach((el) => {
-  const card = new Card(config, el.name, el.link, openPlacePopup);
-  card.render(cardContainer);
+  addPlace(el);
 });
 
 btnEdit.addEventListener("click", function () {
