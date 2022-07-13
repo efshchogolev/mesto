@@ -31,7 +31,6 @@ const initialCards = [
 const btnEdit = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector("#popup_edit");
 const btnCloseEdit = document.querySelector("#close_edit");
-const btnSave = document.querySelector(".popup__submit-button");
 const firstname = document.querySelector(".profile__name");
 const nameInput = document.querySelector(".popup__input_name");
 const about = document.querySelector(".profile__about");
@@ -42,8 +41,6 @@ const btnAdd = document.querySelector(".profile__add-button");
 const popupAdd = document.querySelector("#popup_add");
 const btnCloseAdd = document.querySelector("#close_add");
 const formAdd = document.querySelector("#form_add");
-
-const placeTemplateElement = document.querySelector(".place-template");
 
 const placeNameInputElement = document.querySelector(".popup__input_place");
 const placeImgLinkElement = document.querySelector(".popup__input_link");
@@ -119,7 +116,6 @@ const handlerPlaceSubmit = (evt) => {
 
   formAdd.reset();
   closePopup(popupAdd);
-  formAddValidation.enableValidation();
 };
 
 const addPlace = (el) => {
@@ -148,6 +144,7 @@ btnEdit.addEventListener("click", function () {
   openPopup(popupEdit);
   nameInput.value = firstname.textContent;
   aboutInput.value = about.textContent;
+  formEditValidation.resetValidation();
 });
 
 btnCloseEdit.addEventListener("click", function () {
@@ -156,6 +153,9 @@ btnCloseEdit.addEventListener("click", function () {
 
 btnAdd.addEventListener("click", function () {
   openPopup(popupAdd);
+  placeNameInputElement.value = "";
+  placeImgLinkElement.value = "";
+  formAddValidation.resetValidation();
 });
 
 btnCloseAdd.addEventListener("click", function () {
