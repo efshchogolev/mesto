@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "*** ### Обзор * Проект создан для того, чтобы каждый мог показать самые различные места, которые он смог запечатлеть на камеру *** * Используется адаптивная верстка * Используется флеккбокс верска * Используется грид верстка * Есть возможность изменить имя и информацию о себе с помощью попапа * Используется анмация при наведеии * Используется файловая структура по БЭМ (Nested) *** Ссылка на GitHub Pages: https://efimgoldfinch.github.io/mesto/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EfimGoldfinch/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EfimGoldfinch/mesto/issues"
+  },
+  "homepage": "https://github.com/EfimGoldfinch/mesto#readme"
+}
