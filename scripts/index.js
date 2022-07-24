@@ -113,7 +113,7 @@ const handlerPlaceSubmit = (evt) => {
   el.name = placeName;
   el.link = placeLink;
 
-  addPlace(el);
+  renderCard(el);
 
   formAdd.reset();
   closePopup(popupAdd);
@@ -131,24 +131,16 @@ const openPlacePopup = (placeName, placeLink) => {
   placePopupImageElement.setAttribute("alt", placeName);
 };
 
-// const createPlace = (el) => {
-//   const place = new Card(config, el.name, el.link, openPlacePopup);
-//   const placeElement = place.render();
-//   return placeElement;
-// };
-
-// initialCards.forEach((el) => {
-//   addPlace(el);
-// });
+const renderCard = (item) => {
+  const place = new Card(config, item.name, item.link, openPlacePopup);
+  const cardElement = place.render();
+  cardList.addItem(cardElement);
+};
 
 const cardList = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const place = new Card(config, item.name, item.link, openPlacePopup);
-      const cardElement = place.render();
-      cardList.addItem(cardElement);
-    },
+    renderer: renderCard,
   },
   config.cardList
 );
