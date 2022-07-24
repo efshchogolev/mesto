@@ -131,15 +131,28 @@ const openPlacePopup = (placeName, placeLink) => {
   placePopupImageElement.setAttribute("alt", placeName);
 };
 
-const createPlace = (el) => {
-  const place = new Card(config, el.name, el.link, openPlacePopup);
-  const placeElement = place.render();
-  return placeElement;
-};
+// const createPlace = (el) => {
+//   const place = new Card(config, el.name, el.link, openPlacePopup);
+//   const placeElement = place.render();
+//   return placeElement;
+// };
 
-initialCards.forEach((el) => {
-  addPlace(el);
-});
+// initialCards.forEach((el) => {
+//   addPlace(el);
+// });
+
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const place = new Card(config, item.name, item.link, openPlacePopup);
+      const cardElement = place.render();
+      cardList.addItem(cardElement);
+    },
+  },
+  config.cardList
+);
+cardList.renderItems();
 
 btnEdit.addEventListener("click", function () {
   openPopup(popupEdit);
