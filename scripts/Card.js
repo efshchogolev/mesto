@@ -1,9 +1,9 @@
 class Card {
-  constructor(config, name, image, openPlacePopup) {
+  constructor(config, name, image, handleCardClick) {
     this._config = config;
     this._name = name;
     this._image = image;
-    this._openPlacePopup = openPlacePopup;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -19,7 +19,7 @@ class Card {
         this._deleteCard(evt);
       });
     this._placeImage.addEventListener("click", () => {
-      this._openPlacePopup(this._name, this._image);
+      this._handleCardClick(this._name, this._image);
     });
     this._buttonLike.addEventListener("click", () => {
       this._likeCard();

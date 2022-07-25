@@ -2,6 +2,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 const initialCards = [
   {
@@ -45,18 +46,19 @@ const btnAdd = document.querySelector(".profile__add-button");
 // const popupAdd = document.querySelector("#popup_add");
 const popupAddSelector = "#popup_add";
 const popupAdd = new Popup(popupAddSelector);
-const btnCloseAdd = document.querySelector("#close_add");
+// const btnCloseAdd = document.querySelector("#close_add");
 const formAdd = document.querySelector("#form_add");
 
 const placeNameInputElement = document.querySelector(".popup__input_place");
 const placeImgLinkElement = document.querySelector(".popup__input_link");
-const placePopupElement = document.querySelector("#popup_place");
-const btnCloseImage = placePopupElement.querySelector(".popup__close-button");
-const placePopupImageElement = placePopupElement.querySelector(
-  ".popup__place-image"
-);
-const placePopupNameElement =
-  placePopupElement.querySelector(".popup__place-name");
+// const placePopupElement = document.querySelector("#popup_place");
+const placePopupSelector = "#popup_place";
+// const btnCloseImage = placePopupElement.querySelector(".popup__close-button");
+// const placePopupImageElement = placePopupElement.querySelector(
+//   ".popup__place-image"
+// );
+// const placePopupNameElement =
+//   placePopupElement.querySelector(".popup__place-name");
 const popups = document.querySelectorAll(".popup");
 
 const config = {
@@ -128,15 +130,21 @@ const handlerPlaceSubmit = (evt) => {
 //   cardContainer.prepend(place);
 // };
 
-const openPlacePopup = (placeName, placeLink) => {
-  openPopup(placePopupElement);
-  placePopupNameElement.textContent = placeName;
-  placePopupImageElement.setAttribute("src", placeLink);
-  placePopupImageElement.setAttribute("alt", placeName);
+const handleCardClick = (placeName, placeLink) => {
+  const placePopup = new PopupWithImage(
+    placePopupSelector,
+    placeName,
+    placeLink
+  );
+  placePopup.open();
+  placePopup.setEventListeners();
+  // placePopupNameElement.textContent = placeName;
+  // placePopupImageElement.setAttribute("src", placeLink);
+  // placePopupImageElement.setAttribute("alt", placeName);
 };
 
 const renderCard = (item) => {
-  const place = new Card(config, item.name, item.link, openPlacePopup);
+  const place = new Card(config, item.name, item.link, handleCardClick);
   const cardElement = place.render();
   cardList.addItem(cardElement);
 };
@@ -178,9 +186,9 @@ btnAdd.addEventListener("click", function () {
 //   closePopup(popupAdd);
 // });
 
-btnCloseImage.addEventListener("click", () => {
-  closePopup(placePopupElement);
-});
+// btnCloseImage.addEventListener("click", () => {
+//   closePopup(placePopupElement);
+// });
 
 formAdd.addEventListener("submit", handlerPlaceSubmit);
 formEdit.addEventListener("submit", handlerFormEditSubmit);
