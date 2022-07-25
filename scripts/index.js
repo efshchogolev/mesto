@@ -1,6 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
+import Popup from "./Popup.js";
 
 const initialCards = [
   {
@@ -30,8 +31,10 @@ const initialCards = [
 ];
 
 const btnEdit = document.querySelector(".profile__edit-button");
-const popupEdit = document.querySelector("#popup_edit");
-const btnCloseEdit = document.querySelector("#close_edit");
+// const popupEdit = document.querySelector("#popup_edit");
+const popupEditSelector = "#popup_edit";
+const popupEdit = new Popup(popupEditSelector);
+// const btnCloseEdit = document.querySelector("#close_edit");
 const firstname = document.querySelector(".profile__name");
 const nameInput = document.querySelector(".popup__input_name");
 const about = document.querySelector(".profile__about");
@@ -39,7 +42,9 @@ const aboutInput = document.querySelector(".popup__input_about");
 const formEdit = document.querySelector("#form_edit");
 
 const btnAdd = document.querySelector(".profile__add-button");
-const popupAdd = document.querySelector("#popup_add");
+// const popupAdd = document.querySelector("#popup_add");
+const popupAddSelector = "#popup_add";
+const popupAdd = new Popup(popupAddSelector);
 const btnCloseAdd = document.querySelector("#close_add");
 const formAdd = document.querySelector("#form_add");
 
@@ -71,31 +76,30 @@ const validation = {
   errorClass: "popup__input-error_active",
 };
 
-const cardContainer = document.querySelector(config.cardList);
+// popups.forEach((popup) => {
+//   popup.addEventListener("mousedown", (evt) => {
+//     if (evt.target.classList.contains("popup_isOpen")) {
+//       closePopup(popup);
+//     }
+//   });
+// });
 
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup_isOpen")) {
-      closePopup(popup);
-    }
-  });
-});
+// const closeByEsc = (evt) => {
+//   //закрытие клавишей
+//   if (evt.key === "Escape") {
+//     closePopup(document.querySelector(".popup_isOpen"));
+//   }
+// };
 
-const closeByEsc = (evt) => {
-  if (evt.key === "Escape") {
-    closePopup(document.querySelector(".popup_isOpen"));
-  }
-};
+// function closePopup(popupElement) {
+//   popupElement.classList.remove("popup_isOpen");
+//   document.removeEventListener("keydown", closeByEsc);
+// }
 
-function closePopup(popupElement) {
-  popupElement.classList.remove("popup_isOpen");
-  document.removeEventListener("keydown", closeByEsc);
-}
-
-function openPopup(popupElement) {
-  document.addEventListener("keydown", closeByEsc);
-  popupElement.classList.add("popup_isOpen");
-}
+// function openPopup(popupElement) {
+//   document.addEventListener("keydown", closeByEsc);
+//   popupElement.classList.add("popup_isOpen");
+// }
 
 function handlerFormEditSubmit(evt) {
   evt.preventDefault();
@@ -119,10 +123,10 @@ const handlerPlaceSubmit = (evt) => {
   closePopup(popupAdd);
 };
 
-const addPlace = (el) => {
-  const place = createPlace(el);
-  cardContainer.prepend(place);
-};
+// const addPlace = (el) => {
+//   const place = createPlace(el);
+//   cardContainer.prepend(place);
+// };
 
 const openPlacePopup = (placeName, placeLink) => {
   openPopup(placePopupElement);
@@ -147,26 +151,32 @@ const cardList = new Section(
 cardList.renderItems();
 
 btnEdit.addEventListener("click", function () {
-  openPopup(popupEdit);
+  // openPopup(popupEdit);
+  // const popup = new Popup(popupEditSelector);
+  popupEdit.open();
+  popupEdit.setEventListeners();
   nameInput.value = firstname.textContent;
   aboutInput.value = about.textContent;
   formEditValidation.resetValidation();
 });
 
-btnCloseEdit.addEventListener("click", function () {
-  closePopup(popupEdit);
-});
+// btnCloseEdit.addEventListener("click", function () {
+//   closePopup(popupEdit);
+// });
 
 btnAdd.addEventListener("click", function () {
-  openPopup(popupAdd);
+  // openPopup(popupAdd);
+  // const popup = new Popup(popupEditSelector);
+  popupAdd.open();
+  popupAdd.setEventListeners();
   placeNameInputElement.value = "";
   placeImgLinkElement.value = "";
   formAddValidation.resetValidation();
 });
 
-btnCloseAdd.addEventListener("click", function () {
-  closePopup(popupAdd);
-});
+// btnCloseAdd.addEventListener("click", function () {
+//   closePopup(popupAdd);
+// });
 
 btnCloseImage.addEventListener("click", () => {
   closePopup(placePopupElement);
