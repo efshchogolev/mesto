@@ -3,6 +3,7 @@ import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 const initialCards = [
   {
@@ -34,7 +35,7 @@ const initialCards = [
 const btnEdit = document.querySelector(".profile__edit-button");
 // const popupEdit = document.querySelector("#popup_edit");
 const popupEditSelector = "#popup_edit";
-const popupEdit = new Popup(popupEditSelector);
+
 // const btnCloseEdit = document.querySelector("#close_edit");
 const firstname = document.querySelector(".profile__name");
 const nameInput = document.querySelector(".popup__input_name");
@@ -45,7 +46,7 @@ const formEdit = document.querySelector("#form_edit");
 const btnAdd = document.querySelector(".profile__add-button");
 // const popupAdd = document.querySelector("#popup_add");
 const popupAddSelector = "#popup_add";
-const popupAdd = new Popup(popupAddSelector);
+
 // const btnCloseAdd = document.querySelector("#close_add");
 const formAdd = document.querySelector("#form_add");
 
@@ -105,9 +106,9 @@ const validation = {
 
 function handlerFormEditSubmit(evt) {
   evt.preventDefault();
-  closePopup(popupEdit);
   firstname.textContent = nameInput.value;
   about.textContent = aboutInput.value;
+  popupEdit.close();
 }
 
 const handlerPlaceSubmit = (evt) => {
@@ -122,7 +123,8 @@ const handlerPlaceSubmit = (evt) => {
   renderCard(el);
 
   formAdd.reset();
-  closePopup(popupAdd);
+  // closePopup(popupAdd);
+  popupAdd.close();
 };
 
 // const addPlace = (el) => {
@@ -162,7 +164,6 @@ btnEdit.addEventListener("click", function () {
   // openPopup(popupEdit);
   // const popup = new Popup(popupEditSelector);
   popupEdit.open();
-  popupEdit.setEventListeners();
   nameInput.value = firstname.textContent;
   aboutInput.value = about.textContent;
   formEditValidation.resetValidation();
@@ -176,7 +177,7 @@ btnAdd.addEventListener("click", function () {
   // openPopup(popupAdd);
   // const popup = new Popup(popupEditSelector);
   popupAdd.open();
-  popupAdd.setEventListeners();
+
   placeNameInputElement.value = "";
   placeImgLinkElement.value = "";
   formAddValidation.resetValidation();
@@ -189,9 +190,12 @@ btnAdd.addEventListener("click", function () {
 // btnCloseImage.addEventListener("click", () => {
 //   closePopup(placePopupElement);
 // });
-
-formAdd.addEventListener("submit", handlerPlaceSubmit);
-formEdit.addEventListener("submit", handlerFormEditSubmit);
+const popupEdit = new PopupWithForm(popupEditSelector, handlerFormEditSubmit);
+popupEdit.setEventListeners();
+const popupAdd = new PopupWithForm(popupAddSelector, handlerPlaceSubmit);
+popupAdd.setEventListeners();
+// formAdd.addEventListener("submit", handlerPlaceSubmit);
+// formEdit.addEventListener("submit", handlerFormEditSubmit);
 
 const formEditValidation = new FormValidator(validation, formEdit);
 formEditValidation.enableValidation();
