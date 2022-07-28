@@ -11,11 +11,14 @@ class PopupWithForm extends Popup {
     console.log(this._submitButton);
   }
 
-  _getInputValues() {
+  getInputValues() {
     const inputValues = {};
     this._inputs.forEach((item) => {
+      console.log(item.name);
+      console.log(item.value);
       inputValues[item.name] = item.value;
     });
+    console.log(inputValues);
     return inputValues;
   }
 
@@ -27,10 +30,13 @@ class PopupWithForm extends Popup {
     );
   }
   close() {
-    this._popupElement.classList.remove("popup_isOpen");
+    super.close();
     this._inputs.forEach((input) => {
       input.value = "";
     });
+    if (this._popupSelector === "#popup_add") {
+      this._formElement.reset();
+    }
   }
 }
 

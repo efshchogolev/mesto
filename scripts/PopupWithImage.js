@@ -11,7 +11,7 @@ class PopupWithImage extends Popup {
     this._link = placeLink;
   }
   open() {
-    this._popupElement.classList.add("popup_isOpen");
+    super.open();
     this._imageElement.setAttribute("src", this._link);
     this._nameElement.textContent = this._name;
     this._imageElement.setAttribute("alt", this._name);
