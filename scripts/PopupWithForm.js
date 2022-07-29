@@ -8,17 +8,13 @@ class PopupWithForm extends Popup {
     this._submitButton = this._formElement.querySelector(
       ".popup__submit-button"
     );
-    console.log(this._submitButton);
   }
 
   getInputValues() {
     const inputValues = {};
     this._inputs.forEach((item) => {
-      console.log(item.name);
-      console.log(item.value);
       inputValues[item.name] = item.value;
     });
-    console.log(inputValues);
     return inputValues;
   }
 
