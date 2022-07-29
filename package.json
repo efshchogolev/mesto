@@ -4,16 +4,34 @@
   "description": "*** ### Обзор * Проект создан для того, чтобы каждый мог показать самые различные места, которые он смог запечатлеть на камеру *** * Используется адаптивная верстка * Используется флеккбокс верска * Используется грид верстка * Есть возможность изменить имя и информацию о себе с помощью попапа * Используется анмация при наведеии * Используется файловая структура по БЭМ (Nested) *** Ссылка на GitHub Pages: https://efimgoldfinch.github.io/mesto/",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode=production",
+    "dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EfimGoldfinch/mesto.git"
   },
-  "author": "",
+  "author": "Efim Shchogolev",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/EfimGoldfinch/mesto/issues"
   },
-  "homepage": "https://github.com/EfimGoldfinch/mesto#readme"
+  "homepage": "https://github.com/EfimGoldfinch/mesto#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.9",
+    "autoprefixer": "^10.4.8",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.12",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss-loader": "^7.0.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3"
+  },
+  "dependencies": {
+    "core-js": "^3.24.0"
+  }
 }
