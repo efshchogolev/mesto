@@ -27,12 +27,7 @@ class PopupWithForm extends Popup {
   }
   close() {
     super.close();
-    this._inputs.forEach((input) => {
-      input.value = "";
-    });
-    if (this._popupSelector === "#popup_add") {
-      this._formElement.reset();
-    }
+    this._formElement.reset();
   }
 }
 
