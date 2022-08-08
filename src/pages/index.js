@@ -24,6 +24,9 @@ import {
   config,
   validation,
 } from "../utils/constants";
+import Api from "../components/Api.js";
+
+const api = new Api(config.host, config.token);
 
 function handlerFormEditSubmit(evt) {
   evt.preventDefault();
@@ -63,12 +66,22 @@ const renderCard = (item) => {
 
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: renderCard,
   },
   config.cardList
 );
-cardList.renderItems();
+
+api.getCards().then((items) => {
+  cardList.renderItems(items);
+});
+// const cardList = new Section(
+//   {
+//     items: items,
+//     renderer: renderCard,
+//   },
+//   config.cardList
+// );
+// cardList.renderItems();
 
 btnEdit.addEventListener("click", function () {
   popupEdit.open();
