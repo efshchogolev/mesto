@@ -17,14 +17,11 @@ class Api {
     });
   }
 
-  createCard(item) {
-    return fetch(`${this._host}/cards`, {
-      method: "POST",
+  getUserInfo() {
+    return fetch(`${this._host}/users/me`, {
       headers: {
         authorization: this._token,
-        "content-type": "application/json",
       },
-      body: JSON.stringify({ name: item.name, link: item.link }),
     }).then((res) => {
       if (res.ok) {
         return res.json();

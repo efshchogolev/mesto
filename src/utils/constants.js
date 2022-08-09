@@ -31,6 +31,7 @@ export const popupEditSelector = "#popup_edit";
 export const nameSelector = ".profile__name";
 export const nameInput = document.querySelector(".popup__input_name");
 export const aboutSelector = ".profile__about";
+export const avatarSelector = ".profile__avatar";
 export const aboutInput = document.querySelector(".popup__input_about");
 export const formEdit = document.querySelector("#form_edit");
 

@@ -13,6 +13,7 @@ import {
   nameSelector,
   nameInput,
   aboutSelector,
+  avatarSelector,
   aboutInput,
   formEdit,
   btnAdd,
@@ -44,9 +45,14 @@ const handlerPlaceSubmit = (evt) => {
   popupAdd.close();
 };
 
+api.getUserInfo().then((item) => {
+  userInfo.setUserInfo(item);
+});
+
 const userInfo = new UserInfo({
   nameSelector: nameSelector,
   aboutSelector: aboutSelector,
+  avatarSelector: avatarSelector,
 });
 
 const handleCardClick = (placeName, placeLink) => {
@@ -58,14 +64,12 @@ function createCard(item) {
   const cardElement = place.render();
   return cardElement;
 }
-/////////////////////////////////
-const renderCard = (card) => {
-  api.createCard(card).then((item) => {
-    const cardElement = createCard(item);
-    cardList.addItem(cardElement);
-  });
+
+const renderCard = (item) => {
+  const cardElement = createCard(item);
+  cardList.addItem(cardElement);
 };
-/////////////////////////////////
+
 const cardList = new Section(
   {
     renderer: renderCard,

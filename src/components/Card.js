@@ -1,9 +1,10 @@
 class Card {
-  constructor(config, name, image, handleCardClick) {
+  constructor(config, name, image, handleCardClick, deleteCardFromServer) {
     this._config = config;
     this._name = name;
     this._image = image;
     this._handleCardClick = handleCardClick;
+    this._deleteCardFromServer = deleteCardFromServer;
   }
 
   _getTemplate() {
@@ -28,6 +29,7 @@ class Card {
 
   _deleteCard(evt) {
     evt.preventDefault();
+    this._deleteCardFromServer();
     this._view.remove();
     this._view = null;
   }
