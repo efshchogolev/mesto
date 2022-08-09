@@ -40,7 +40,7 @@ const handlerPlaceSubmit = (evt) => {
   evt.preventDefault();
 
   const placeInfo = popupAdd.getInputValues();
-  renderCard(placeInfo);
+  addCard(placeInfo);
 
   popupAdd.close();
 };
@@ -64,6 +64,15 @@ function createCard(item) {
   const cardElement = place.render();
   return cardElement;
 }
+
+function addCard(card) {
+  api.createCard(card).then((item) => {
+    renderCard(item);
+  });
+}
+// const addCard = (item) => {
+//   renderCard(item);
+// };
 
 const renderCard = (item) => {
   const cardElement = createCard(item);
