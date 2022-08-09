@@ -58,12 +58,14 @@ function createCard(item) {
   const cardElement = place.render();
   return cardElement;
 }
-
-const renderCard = (item) => {
-  const cardElement = createCard(item);
-  cardList.addItem(cardElement);
+/////////////////////////////////
+const renderCard = (card) => {
+  api.createCard(card).then((item) => {
+    const cardElement = createCard(item);
+    cardList.addItem(cardElement);
+  });
 };
-
+/////////////////////////////////
 const cardList = new Section(
   {
     renderer: renderCard,
