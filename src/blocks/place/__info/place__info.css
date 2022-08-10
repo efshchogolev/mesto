@@ -1,6 +1,6 @@
 .place__info {
   display: flex;
-  padding: 25px 0 31px;
+  height: 79px;
   align-items: center;
   justify-content: space-between;
   background-color: #fff;

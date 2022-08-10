@@ -48,6 +48,8 @@ class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+
+  // deleteCard(id)
 }
 
 export default Api;

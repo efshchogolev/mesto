@@ -27,11 +27,15 @@ class Card {
     });
   }
 
-  _deleteCard(evt) {
-    evt.preventDefault();
-    this._deleteCardFromServer();
-    this._view.remove();
-    this._view = null;
+  async _deleteCard(evt) {
+    try {
+      evt.preventDefault();
+      await this._deleteCardFromServer();
+      this._view.remove();
+      this._view = null;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   _likeCard() {

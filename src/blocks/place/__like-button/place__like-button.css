@@ -7,15 +7,13 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-left: auto;
-  margin-right: 20px;
+  margin-bottom: 3px;
   flex-shrink: 0;
-  transition: opacity .3s ease-in-out;
-
+  transition: opacity 0.3s ease-in-out;
 }
 
 .place__like-button:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .place__like-button:active {
