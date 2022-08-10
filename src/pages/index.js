@@ -27,6 +27,8 @@ import {
 } from "../utils/constants";
 import Api from "../components/Api.js";
 
+let userId;
+
 const api = new Api(config.host, config.token);
 
 function handlerFormEditSubmit(evt) {
@@ -47,6 +49,7 @@ const handlerPlaceSubmit = (evt) => {
 
 api.getUserInfoFromServer().then((item) => {
   userInfo.setUserInfo(item);
+  userId = item._id;
 });
 
 const userInfo = new UserInfo({
@@ -64,7 +67,7 @@ const handleCardClick = (placeName, placeLink) => {
 };
 
 function createCard(item) {
-  const place = new Card(config, item, handleCardClick, deleteCard);
+  const place = new Card(config, item, handleCardClick, deleteCard, userId);
   const cardElement = place.render();
   return cardElement;
 }

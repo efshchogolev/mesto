@@ -1,11 +1,12 @@
 class Card {
-  constructor(config, card, handleCardClick, deleteCardFromServer) {
+  constructor(config, card, handleCardClick, deleteCardFromServer, userId) {
     this._config = config;
     this._card = card;
     this._name = card.name;
     this._link = card.link;
     this._handleCardClick = handleCardClick;
     this._deleteCardFromServer = deleteCardFromServer;
+    this._userId = userId;
   }
 
   _getTemplate() {
@@ -43,15 +44,23 @@ class Card {
     this._buttonLike.classList.toggle("place__like-button_active");
   }
 
+  _checkOwner(template) {
+    if (this._userId !== this._card.owner._id) {
+      template.querySelector(this._config.cardDeleteButton).style.display =
+        "none";
+    }
+    return template;
+  }
+
   render() {
-    this._view = this._getTemplate();
+    this._view = this._checkOwner(this._getTemplate());
     this._placeName = this._view.querySelector(this._config.cardName);
     this._placeName.textContent = this._name;
     this._placeImage = this._view.querySelector(this._config.cardImage);
     this._placeImage.src = this._link;
     this._placeImage.alt = this._name;
     this._buttonLike = this._view.querySelector(this._config.cardLikeButton);
-
+    // this._checkOwner();
     this._addEventListeners();
 
     return this._view;
