@@ -2,54 +2,54 @@ class Api {
   constructor(host, token) {
     this._host = host;
     this._token = token;
+
+    this._getJsonOrError = this._getJsonOrError.bind(this);
+    this._getHeaders = this._getHeaders.bind(this);
+  }
+
+  _getJsonOrError(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  _getHeaders() {
+    return {
+      authorization: this._token,
+      "content-type": "application/json",
+    };
   }
 
   getCards() {
     return fetch(`${this._host}/cards`, {
-      headers: {
-        authorization: this._token,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+      headers: this._getHeaders(),
+    }).then(this._getJsonOrError);
   }
 
-  getUserInfo() {
+  getUserInfoFromServer() {
     return fetch(`${this._host}/users/me`, {
-      headers: {
-        authorization: this._token,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+      headers: this._getHeaders(),
+    }).then(this._getJsonOrError);
   }
 
   createCard(card) {
     return fetch(`${this._host}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._token,
-        "content-type": "application/json",
-      },
+      headers: this._getHeaders(),
       body: JSON.stringify({
         name: card.name,
         link: card.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(this._getJsonOrError);
   }
 
-  // deleteCard(id)
+  deleteCard(id) {
+    return fetch(`${this._host}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._getHeaders(),
+    }).then(this._getJsonOrError);
+  }
 }
 
 export default Api;

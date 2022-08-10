@@ -1,6 +1,6 @@
 .place__info {
   display: flex;
-  height: 79px;
+  min-height: 79px;
   align-items: center;
   justify-content: space-between;
   background-color: #fff;

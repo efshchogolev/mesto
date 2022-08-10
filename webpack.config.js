@@ -16,17 +16,21 @@ module.exports = {
     static: path.resolve(__dirname, "dist"),
     open: true,
   },
+  devtool: "eval-source-map",
   module: {
     rules: [
       {
         test: /\.m?js.$/,
         exclude: /(node_modules|bower-components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+            },
           },
-        },
+          "source-map-loader",
+        ],
       },
       {
         test: /\.css$/,

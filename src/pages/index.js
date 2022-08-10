@@ -45,7 +45,7 @@ const handlerPlaceSubmit = (evt) => {
   popupAdd.close();
 };
 
-api.getUserInfo().then((item) => {
+api.getUserInfoFromServer().then((item) => {
   userInfo.setUserInfo(item);
 });
 
@@ -55,12 +55,16 @@ const userInfo = new UserInfo({
   avatarSelector: avatarSelector,
 });
 
+function deleteCard(id) {
+  return api.deleteCard(id);
+}
+
 const handleCardClick = (placeName, placeLink) => {
   placePopup.open(placeName, placeLink);
 };
 
 function createCard(item) {
-  const place = new Card(config, item.name, item.link, handleCardClick);
+  const place = new Card(config, item, handleCardClick, deleteCard);
   const cardElement = place.render();
   return cardElement;
 }

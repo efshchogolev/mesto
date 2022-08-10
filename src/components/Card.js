@@ -1,8 +1,9 @@
 class Card {
-  constructor(config, name, image, handleCardClick, deleteCardFromServer) {
+  constructor(config, card, handleCardClick, deleteCardFromServer) {
     this._config = config;
-    this._name = name;
-    this._image = image;
+    this._card = card;
+    this._name = card.name;
+    this._link = card.link;
     this._handleCardClick = handleCardClick;
     this._deleteCardFromServer = deleteCardFromServer;
   }
@@ -20,7 +21,7 @@ class Card {
         this._deleteCard(evt);
       });
     this._placeImage.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._image);
+      this._handleCardClick(this._name, this._link);
     });
     this._buttonLike.addEventListener("click", () => {
       this._likeCard();
@@ -30,7 +31,7 @@ class Card {
   async _deleteCard(evt) {
     try {
       evt.preventDefault();
-      await this._deleteCardFromServer();
+      await this._deleteCardFromServer(this._card._id);
       this._view.remove();
       this._view = null;
     } catch (error) {
@@ -47,7 +48,7 @@ class Card {
     this._placeName = this._view.querySelector(this._config.cardName);
     this._placeName.textContent = this._name;
     this._placeImage = this._view.querySelector(this._config.cardImage);
-    this._placeImage.src = this._image;
+    this._placeImage.src = this._link;
     this._placeImage.alt = this._name;
     this._buttonLike = this._view.querySelector(this._config.cardLikeButton);
 
