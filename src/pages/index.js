@@ -64,10 +64,23 @@ const userInfo = new UserInfo({
   avatarSelector: avatarSelector,
 });
 
-function deleteCard(id) {
-  popupSubmit.open();
+function deleteCard({ id, card }) {
+  return api
+    .deleteCard(id)
+    .then(console.log(card), card.remove(), (card = null))
+    .catch((err) => console.log(err));
+}
 
-  return api.deleteCard(id);
+function handleFormDelete(evt) {
+  evt.preventDefault();
+  console.log(popupSubmit.getCardData());
+  deleteCard(popupSubmit.getCardData());
+
+  popupSubmit.close();
+}
+
+function openDeletePopup(id, card) {
+  popupSubmit.open(id, card);
 }
 
 const handleCardClick = (placeName, placeLink) => {
@@ -75,7 +88,13 @@ const handleCardClick = (placeName, placeLink) => {
 };
 
 function createCard(item) {
-  const place = new Card(config, item, handleCardClick, deleteCard, userId);
+  const place = new Card(
+    config,
+    item,
+    handleCardClick,
+    openDeletePopup,
+    userId
+  );
   const cardElement = place.render();
   return cardElement;
 }
@@ -85,9 +104,6 @@ function addCard(card) {
     renderCard(item);
   });
 }
-// const addCard = (item) => {
-//   renderCard(item);
-// };
 
 const renderCard = (item) => {
   const cardElement = createCard(item);
@@ -104,14 +120,6 @@ const cardList = new Section(
 api.getCards().then((items) => {
   cardList.renderItems(items);
 });
-// const cardList = new Section(
-//   {
-//     items: items,
-//     renderer: renderCard,
-//   },
-//   config.cardList
-// );
-// cardList.renderItems();
 
 btnEdit.addEventListener("click", function () {
   popupEdit.open();
@@ -127,7 +135,8 @@ btnAdd.addEventListener("click", function () {
   formAddValidation.resetValidation();
 });
 
-const popupSubmit = new PopupWithSubmit(popupDeleteSelector);
+const popupSubmit = new PopupWithSubmit(popupDeleteSelector, handleFormDelete);
+popupSubmit.setEventListeners();
 
 const popupEdit = new PopupWithForm(popupEditSelector, handlerFormEditSubmit);
 popupEdit.setEventListeners();

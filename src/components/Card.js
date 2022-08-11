@@ -19,7 +19,7 @@ class Card {
     this._view
       .querySelector(this._config.cardDeleteButton)
       .addEventListener("click", (evt) => {
-        this._deleteCard(evt);
+        this._deleteCard(this._card);
       });
     this._placeImage.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
@@ -29,15 +29,8 @@ class Card {
     });
   }
 
-  async _deleteCard(evt) {
-    try {
-      evt.preventDefault();
-      await this._deleteCardFromServer(this._card._id);
-      this._view.remove();
-      this._view = null;
-    } catch (error) {
-      console.log(error);
-    }
+  _deleteCard() {
+    this._deleteCardFromServer(this._card._id, this._view);
   }
 
   _likeCard() {
