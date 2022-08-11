@@ -54,13 +54,15 @@ class Card {
 
   render() {
     this._view = this._checkOwner(this._getTemplate());
+
     this._placeName = this._view.querySelector(this._config.cardName);
     this._placeName.textContent = this._name;
     this._placeImage = this._view.querySelector(this._config.cardImage);
     this._placeImage.src = this._link;
     this._placeImage.alt = this._name;
     this._buttonLike = this._view.querySelector(this._config.cardLikeButton);
-    // this._checkOwner();
+    this._likesCount = this._view.querySelector(this._config.cardLikes);
+    this._likesCount.textContent = this._card.likes.length;
     this._addEventListeners();
 
     return this._view;

@@ -48,6 +48,7 @@ export const config = {
   placeTemplate: ".place-template",
   cardName: ".place__name",
   cardImage: ".place__image",
+  cardLikes: ".place__like-count",
   cardList: ".elements",
   cardDeleteButton: ".place__delete-button",
   cardLikeButton: ".place__like-button",
