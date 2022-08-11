@@ -34,7 +34,11 @@ const api = new Api(config.host, config.token);
 function handlerFormEditSubmit(evt) {
   evt.preventDefault();
   const info = popupEdit.getInputValues();
-  userInfo.setUserInfo(info);
+
+  api.updateUserInfo(info).then((data) => {
+    userInfo.setUserInfo(data);
+  });
+
   popupEdit.close();
 }
 

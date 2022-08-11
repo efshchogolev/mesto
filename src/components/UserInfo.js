@@ -6,12 +6,12 @@ class UserInfo {
     this._id;
   }
 
-  // getUserInfo() {
-  //   const userData = {};
-  //   userData.name = this._name.textContent;
-  //   userData.about = this._about.textContent;
-  //   return userData;
-  // }
+  getUserInfo() {
+    const userData = {};
+    userData.name = this._name.textContent;
+    userData.about = this._about.textContent;
+    return userData;
+  }
   setUserInfo({ name, about, avatar, _id }) {
     this._name.textContent = name;
     this._about.textContent = about;
