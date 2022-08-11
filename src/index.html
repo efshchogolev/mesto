@@ -14,7 +14,9 @@
       <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="Логотип Mesto">
     </header>
     <section class="profile">
-      <img src="<%=require('./images/Avatar.jpg')%>" class="profile__avatar" alt="Аватарка">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/Avatar.jpg')%>" class="profile__avatar" alt="Аватарка">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button class="profile__edit-button"></button>
@@ -65,7 +67,7 @@
       </div>
     </div>
 
-    <div class="popup popup_isOpen" id="popup_avatar">
+    <div class="popup" id="popup_avatar">
       <div class="popup__container popup__container_avatar">
         <button class="popup__close-button" id="close_avatar"></button>
         <h2 class="popup__title">Обновить аватар</h2>
