@@ -26,6 +26,9 @@ import {
   config,
   validation,
   popupDeleteSelector,
+  popupAvatarSelector,
+  btnAvatar,
+  formAvatar,
 } from "../utils/constants";
 import Api from "../components/Api.js";
 
@@ -57,6 +60,18 @@ api.getUserInfoFromServer().then((item) => {
   userInfo.setUserInfo(item);
   userId = item._id;
 });
+///////////////////////////////////
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  const avatarLink = popupAvatar.getInputValues();
+  api
+    .updateUserAvatar(avatarLink.link)
+    .then((avatar) => {
+      userInfo.setUserInfo(avatar);
+    })
+    .catch((err) => console.log(err));
+  // popupAvatar.close()
+}
 
 const userInfo = new UserInfo({
   nameSelector: nameSelector,
@@ -135,8 +150,16 @@ btnAdd.addEventListener("click", function () {
   formAddValidation.resetValidation();
 });
 
+btnAvatar.addEventListener("click", function () {
+  popupAvatar.open();
+  formAvatarValidation.resetValidation();
+});
+
 const popupSubmit = new PopupWithSubmit(popupDeleteSelector, handleFormDelete);
 popupSubmit.setEventListeners();
+
+const popupAvatar = new PopupWithForm(popupAvatarSelector, handleAvatarSubmit);
+popupAvatar.setEventListeners();
 
 const popupEdit = new PopupWithForm(popupEditSelector, handlerFormEditSubmit);
 popupEdit.setEventListeners();
@@ -147,6 +170,8 @@ const formEditValidation = new FormValidator(validation, formEdit);
 formEditValidation.enableValidation();
 const formAddValidation = new FormValidator(validation, formAdd);
 formAddValidation.enableValidation();
+const formAvatarValidation = new FormValidator(validation, formAvatar);
+formAvatarValidation.enableValidation();
 
 const placePopup = new PopupWithImage(placePopupSelector);
 placePopup.setEventListeners();

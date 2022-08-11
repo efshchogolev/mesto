@@ -61,6 +61,17 @@ class Api {
       }),
     }).then(this._getJsonOrError);
   }
+
+  updateUserAvatar(link) {
+    console.log(link);
+    return fetch(`${this._host}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._getHeaders(),
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then(this._getJsonOrError);
+  }
 }
 
 export default Api;

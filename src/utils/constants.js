@@ -30,6 +30,10 @@ export const popupEditSelector = "#popup_edit";
 
 export const popupDeleteSelector = "#popup_delete";
 
+export const popupAvatarSelector = "#popup_avatar";
+export const btnAvatar = document.querySelector(".profile__avatar");
+export const formAvatar = document.querySelector("#form_avatar");
+
 export const nameSelector = ".profile__name";
 export const nameInput = document.querySelector(".popup__input_name");
 export const aboutSelector = ".profile__about";
