@@ -5,6 +5,7 @@ import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
 import {
   initialCards,
@@ -24,6 +25,7 @@ import {
   placePopupSelector,
   config,
   validation,
+  popupDeleteSelector,
 } from "../utils/constants";
 import Api from "../components/Api.js";
 
@@ -63,6 +65,8 @@ const userInfo = new UserInfo({
 });
 
 function deleteCard(id) {
+  popupSubmit.open();
+
   return api.deleteCard(id);
 }
 
@@ -122,6 +126,8 @@ btnAdd.addEventListener("click", function () {
   popupAdd.open();
   formAddValidation.resetValidation();
 });
+
+const popupSubmit = new PopupWithSubmit(popupDeleteSelector);
 
 const popupEdit = new PopupWithForm(popupEditSelector, handlerFormEditSubmit);
 popupEdit.setEventListeners();

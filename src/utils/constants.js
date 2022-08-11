@@ -28,6 +28,8 @@
 export const btnEdit = document.querySelector(".profile__edit-button");
 export const popupEditSelector = "#popup_edit";
 
+export const popupDeleteSelector = "#popup_delete";
+
 export const nameSelector = ".profile__name";
 export const nameInput = document.querySelector(".popup__input_name");
 export const aboutSelector = ".profile__about";
