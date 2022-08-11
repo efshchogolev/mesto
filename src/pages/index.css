@@ -51,3 +51,7 @@
 
 @import url(../blocks/popup/__container/_delete/popup__container_delete.css);
 @import url(../blocks/popup/__submit-button/_delete/popup__submit-button_delete.css);
+
+@import url(../blocks/popup/__input/_avatar/popup__input_avatar.css);
+@import url(../blocks/popup/__container/_avatar/popup__container_avatar.css);
+@import url(../blocks/popup/__submit-button/_avatar/popup__submit-button_avatar.css);

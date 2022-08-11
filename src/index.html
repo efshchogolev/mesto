@@ -65,6 +65,20 @@
       </div>
     </div>
 
+    <div class="popup popup_isOpen" id="popup_avatar">
+      <div class="popup__container popup__container_avatar">
+        <button class="popup__close-button" id="close_avatar"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" id="form_add" novalidate>
+          <label class="popup__label">
+            <input type="url" class="popup__input popup__input_avatar" placeholder="Ссылка на картинку" name="link" id="place-url" required >
+            <span class="popup__error-message place-url-error"></span>
+          </label>
+          <button type="submit" class="popup__submit-button popup__submit-button_avatar" id="submit_avatar">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup" id="popup_place">
       <div class="popup__place-container">
         <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" class="popup__place-image" alt="Архыз">
