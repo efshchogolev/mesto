@@ -70,7 +70,6 @@ const handlerPlaceSubmit = (evt) => {
     });
 };
 
-////////////////////////////////
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const avatarLink = popupAvatar.getInputValues();
@@ -143,7 +142,7 @@ const renderCard = (item) => {
   const cardElement = createCard(item);
   cardList.addItem(cardElement);
 };
-//////////////////////////////////////////////
+
 function handleRenderLoading(isLoading, submitButton) {
   if (isLoading) {
     submitButton.textContent = "Сохранение...";
