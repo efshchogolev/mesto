@@ -60,7 +60,7 @@ api.getUserInfoFromServer().then((item) => {
   userInfo.setUserInfo(item);
   userId = item._id;
 });
-///////////////////////////////////
+
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const avatarLink = popupAvatar.getInputValues();
@@ -70,7 +70,7 @@ function handleAvatarSubmit(evt) {
       userInfo.setUserInfo(avatar);
     })
     .catch((err) => console.log(err));
-  // popupAvatar.close()
+  popupAvatar.close();
 }
 
 const userInfo = new UserInfo({
@@ -82,13 +82,12 @@ const userInfo = new UserInfo({
 function deleteCard({ id, card }) {
   return api
     .deleteCard(id)
-    .then(console.log(card), card.remove(), (card = null))
+    .then(card.remove(), (card = null))
     .catch((err) => console.log(err));
 }
 
 function handleFormDelete(evt) {
   evt.preventDefault();
-  console.log(popupSubmit.getCardData());
   deleteCard(popupSubmit.getCardData());
 
   popupSubmit.close();
@@ -102,13 +101,23 @@ const handleCardClick = (placeName, placeLink) => {
   placePopup.open(placeName, placeLink);
 };
 
+function handleLikeCard(id) {
+  return api.setLike(id);
+}
+
+function handleDislikeCard(id) {
+  return api.deleteLike(id);
+}
+
 function createCard(item) {
   const place = new Card(
     config,
     item,
     handleCardClick,
     openDeletePopup,
-    userId
+    userId,
+    handleLikeCard,
+    handleDislikeCard
   );
   const cardElement = place.render();
   return cardElement;
@@ -124,6 +133,12 @@ const renderCard = (item) => {
   const cardElement = createCard(item);
   cardList.addItem(cardElement);
 };
+
+function renderLoading(isLoading) {
+  if (isLoader) {
+    button.classList.add("");
+  }
+}
 
 const cardList = new Section(
   {

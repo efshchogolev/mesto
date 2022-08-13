@@ -63,13 +63,26 @@ class Api {
   }
 
   updateUserAvatar(link) {
-    console.log(link);
     return fetch(`${this._host}/users/me/avatar`, {
       method: "PATCH",
       headers: this._getHeaders(),
       body: JSON.stringify({
         avatar: link,
       }),
+    }).then(this._getJsonOrError);
+  }
+
+  setLike(id) {
+    return fetch(`${this._host}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._getHeaders(),
+    }).then(this._getJsonOrError);
+  }
+
+  deleteLike(id) {
+    return fetch(`${this._host}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this._getHeaders(),
     }).then(this._getJsonOrError);
   }
 }

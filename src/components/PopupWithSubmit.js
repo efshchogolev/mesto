@@ -21,7 +21,6 @@ class PopupWithSubmit extends Popup {
   submitDelete() {}
 
   open(id, card) {
-    console.log(id);
     super.open();
     this._cardData = {};
     this._cardData.id = id;
