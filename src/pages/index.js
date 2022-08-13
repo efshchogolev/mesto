@@ -38,39 +38,55 @@ const api = new Api(config.host, config.token);
 
 function handlerFormEditSubmit(evt) {
   evt.preventDefault();
+  popupEdit.setLoader();
   const info = popupEdit.getInputValues();
-
-  api.updateUserInfo(info).then((data) => {
-    userInfo.setUserInfo(data);
-  });
-
-  popupEdit.close();
+  api
+    .updateUserInfo(info)
+    .then((data) => {
+      userInfo.setUserInfo(data);
+    })
+    .then(() => popupEdit.close())
+    .catch((err) => console.log(err))
+    .finally(() => {
+      popupEdit.removeLoader();
+    });
 }
 
 const handlerPlaceSubmit = (evt) => {
   evt.preventDefault();
-
   const placeInfo = popupAdd.getInputValues();
-  addCard(placeInfo);
-
-  popupAdd.close();
+  popupAdd.setLoader();
+  api
+    .createCard(placeInfo)
+    .then((item) => {
+      renderCard(item);
+    })
+    .then(() => {
+      popupAdd.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      popupAdd.removeLoader();
+    });
 };
 
-api.getUserInfoFromServer().then((item) => {
-  userInfo.setUserInfo(item);
-  userId = item._id;
-});
-
+////////////////////////////////
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
   const avatarLink = popupAvatar.getInputValues();
+  popupAvatar.setLoader();
   api
     .updateUserAvatar(avatarLink.link)
     .then((avatar) => {
       userInfo.setUserInfo(avatar);
     })
-    .catch((err) => console.log(err));
-  popupAvatar.close();
+    .then(() => {
+      popupAvatar.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      popupAvatar.removeLoader();
+    });
 }
 
 const userInfo = new UserInfo({
@@ -123,20 +139,20 @@ function createCard(item) {
   return cardElement;
 }
 
-function addCard(card) {
-  api.createCard(card).then((item) => {
-    renderCard(item);
-  });
-}
-
 const renderCard = (item) => {
   const cardElement = createCard(item);
   cardList.addItem(cardElement);
 };
-
-function renderLoading(isLoading) {
-  if (isLoader) {
-    button.classList.add("");
+//////////////////////////////////////////////
+function handleRenderLoading(isLoading, submitButton) {
+  if (isLoading) {
+    submitButton.textContent = "Сохранение...";
+  } else {
+    if (submitButton.classList.contains("popup__submit-button_add")) {
+      submitButton.textContent = "Создать";
+    } else {
+      submitButton.textContent = "Сохранить";
+    }
   }
 }
 
@@ -146,10 +162,6 @@ const cardList = new Section(
   },
   config.cardList
 );
-
-api.getCards().then((items) => {
-  cardList.renderItems(items);
-});
 
 btnEdit.addEventListener("click", function () {
   popupEdit.open();
@@ -173,12 +185,24 @@ btnAvatar.addEventListener("click", function () {
 const popupSubmit = new PopupWithSubmit(popupDeleteSelector, handleFormDelete);
 popupSubmit.setEventListeners();
 
-const popupAvatar = new PopupWithForm(popupAvatarSelector, handleAvatarSubmit);
+const popupAvatar = new PopupWithForm(
+  popupAvatarSelector,
+  handleAvatarSubmit,
+  handleRenderLoading
+);
 popupAvatar.setEventListeners();
 
-const popupEdit = new PopupWithForm(popupEditSelector, handlerFormEditSubmit);
+const popupEdit = new PopupWithForm(
+  popupEditSelector,
+  handlerFormEditSubmit,
+  handleRenderLoading
+);
 popupEdit.setEventListeners();
-const popupAdd = new PopupWithForm(popupAddSelector, handlerPlaceSubmit);
+const popupAdd = new PopupWithForm(
+  popupAddSelector,
+  handlerPlaceSubmit,
+  handleRenderLoading
+);
 popupAdd.setEventListeners();
 
 const formEditValidation = new FormValidator(validation, formEdit);
@@ -190,3 +214,12 @@ formAvatarValidation.enableValidation();
 
 const placePopup = new PopupWithImage(placePopupSelector);
 placePopup.setEventListeners();
+
+Promise.all([api.getUserInfoFromServer(), api.getCards()])
+  .then(([user, cards]) => {
+    userId = user._id;
+    userInfo.setUserInfo(user);
+
+    cardList.renderItems(cards);
+  })
+  .catch((err) => console.log(err));
