@@ -10,8 +10,4 @@
   opacity: 0.2;
 }
 
-@media screen and (max-width: 797px) {
-  .profile__avatar {
-    margin: 0;
-  }
-}
+

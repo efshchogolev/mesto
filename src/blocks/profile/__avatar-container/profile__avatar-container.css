@@ -7,3 +7,8 @@
   display: flex;
   background-position: center;
 }
+@media screen and (max-width: 797px) {
+  .profile__avatar-container {
+    margin: 0;
+  }
+}
