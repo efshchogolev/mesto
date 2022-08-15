@@ -31,6 +31,7 @@ export const config = {
   cardList: ".elements",
   cardDeleteButton: ".place__delete-button",
   cardLikeButton: ".place__like-button",
+  cardLikeActiveClass: "place__like-button_active",
   host: "https://mesto.nomoreparties.co/v1/cohort-47",
   token: "ad5a4fe9-6249-4900-9757-39fd298866ec",
 };

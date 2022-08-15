@@ -116,12 +116,16 @@ const handleCardClick = (placeName, placeLink) => {
   placePopup.open(placeName, placeLink);
 };
 
-function handleLikeCard(id) {
-  return api.setLike(id);
-}
-
-function handleDislikeCard(id) {
-  return api.deleteLike(id);
+function handleUpdateCardLikes(id, isLiked, card) {
+  if (!isLiked) {
+    api.setLike(id).then((res) => {
+      card.updateLikes(res.likes);
+    });
+  } else {
+    api.deleteLike(id).then((res) => {
+      card.updateLikes(res.likes);
+    });
+  }
 }
 
 function createCard(item) {
@@ -131,8 +135,7 @@ function createCard(item) {
     handleCardClick,
     openDeletePopup,
     userId,
-    handleLikeCard,
-    handleDislikeCard
+    handleUpdateCardLikes
   );
   const cardElement = place.render();
   return cardElement;
