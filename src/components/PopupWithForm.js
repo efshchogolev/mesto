@@ -43,14 +43,6 @@ class PopupWithForm extends Popup {
     super.close();
     this._formElement.reset();
   }
-
-  // setLoader() {
-  //   this._handleRenderLoading(true);
-  // }
-
-  // removeLoader() {
-  //   this._handleRenderLoading(false);
-  // }
 }
 
 export default PopupWithForm;

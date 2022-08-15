@@ -2,13 +2,11 @@ import "./../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
 import {
-  initialCards,
   btnEdit,
   popupEditSelector,
   nameSelector,
@@ -20,8 +18,6 @@ import {
   btnAdd,
   popupAddSelector,
   formAdd,
-  placeNameInputElement,
-  placeImgLinkElement,
   placePopupSelector,
   config,
   validation,
@@ -135,18 +131,6 @@ const renderCard = (item) => {
   cardList.addItem(cardElement);
 };
 
-// function handleRenderLoading(isLoading, submitButton) {
-// if (isLoading) {
-//   submitButton.textContent = "Сохранение...";
-// } else {
-//   if (submitButton.classList.contains("popup__submit-button_add")) {
-//     submitButton.textContent = "Создать";
-//   } else {
-//     submitButton.textContent = "Сохранить";
-//   }
-// }
-// }
-
 const cardList = new Section(
   {
     renderer: renderCard,
@@ -176,24 +160,12 @@ btnAvatar.addEventListener("click", function () {
 const popupSubmit = new PopupWithSubmit(popupDeleteSelector, handleFormDelete);
 popupSubmit.setEventListeners();
 
-const popupAvatar = new PopupWithForm(
-  popupAvatarSelector,
-  handleAvatarSubmit
-  // handleRenderLoading
-);
+const popupAvatar = new PopupWithForm(popupAvatarSelector, handleAvatarSubmit);
 popupAvatar.setEventListeners();
 
-const popupEdit = new PopupWithForm(
-  popupEditSelector,
-  handlerFormEditSubmit
-  // handleRenderLoading
-);
+const popupEdit = new PopupWithForm(popupEditSelector, handlerFormEditSubmit);
 popupEdit.setEventListeners();
-const popupAdd = new PopupWithForm(
-  popupAddSelector,
-  handlerPlaceSubmit
-  // handleRenderLoading
-);
+const popupAdd = new PopupWithForm(popupAddSelector, handlerPlaceSubmit);
 popupAdd.setEventListeners();
 
 const formEditValidation = new FormValidator(validation, formEdit);
