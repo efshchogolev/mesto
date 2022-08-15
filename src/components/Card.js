@@ -18,6 +18,7 @@ class Card {
     this._handleLikeCard = handleLikeCard;
     this._handleDislikeCard = handleDislikeCard;
     this._userId = userId;
+    this._likes = this._card.likes;
   }
 
   _getTemplate() {
