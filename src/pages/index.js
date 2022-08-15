@@ -36,12 +36,11 @@ let userId;
 
 const api = new Api(config.host, config.token);
 
-function handlerFormEditSubmit(evt) {
-  evt.preventDefault();
+function handlerFormEditSubmit(inputs) {
   popupEdit.setLoader();
-  const info = popupEdit.getInputValues();
+
   api
-    .updateUserInfo(info)
+    .updateUserInfo(inputs)
     .then((data) => {
       userInfo.setUserInfo(data);
     })
@@ -52,12 +51,10 @@ function handlerFormEditSubmit(evt) {
     });
 }
 
-const handlerPlaceSubmit = (evt) => {
-  evt.preventDefault();
-  const placeInfo = popupAdd.getInputValues();
+const handlerPlaceSubmit = (inputs) => {
   popupAdd.setLoader();
   api
-    .createCard(placeInfo)
+    .createCard(inputs)
     .then((item) => {
       renderCard(item);
     })
@@ -70,12 +67,10 @@ const handlerPlaceSubmit = (evt) => {
     });
 };
 
-function handleAvatarSubmit(evt) {
-  evt.preventDefault();
-  const avatarLink = popupAvatar.getInputValues();
+function handleAvatarSubmit(inputs) {
   popupAvatar.setLoader();
   api
-    .updateUserAvatar(avatarLink.link)
+    .updateUserAvatar(inputs.link)
     .then((avatar) => {
       userInfo.setUserInfo(avatar);
     })

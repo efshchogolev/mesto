@@ -23,11 +23,9 @@ class FormValidator {
   }
 
   _disableError(inputElement) {
-    console.log(this._formElement);
     this._errorElement = this._formElement.querySelector(
       `.${inputElement.id}-error`
     );
-    console.log(this._errorElement);
     inputElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.remove(this._errorClass);
     this._errorElement.textContent = "";
