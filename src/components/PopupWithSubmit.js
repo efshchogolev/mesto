@@ -12,13 +12,11 @@ class PopupWithSubmit extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._submitButton.addEventListener(
-      "click",
-      this._handleFormDelete.bind(this)
-    );
+    this._submitButton.addEventListener("click", (evt) => {
+      evt.preventDefault();
+      this._handleFormDelete(this._getCardData());
+    });
   }
-
-  submitDelete() {}
 
   open(id, card) {
     super.open();
@@ -27,7 +25,7 @@ class PopupWithSubmit extends Popup {
     this._cardData.card = card;
   }
 
-  getCardData() {
+  _getCardData() {
     return this._cardData;
   }
 }

@@ -26,18 +26,31 @@ class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues());
     });
   }
+
+  toggleLoader(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Сохранение...";
+    } else {
+      if (this._submitButton.classList.contains("popup__submit-button_add")) {
+        this._submitButton.textContent = "Создать";
+      } else {
+        this._submitButton.textContent = "Сохранить";
+      }
+    }
+  }
+
   close() {
     super.close();
     this._formElement.reset();
   }
 
-  setLoader() {
-    this._handleRenderLoading(true, this._submitButton);
-  }
+  // setLoader() {
+  //   this._handleRenderLoading(true);
+  // }
 
-  removeLoader() {
-    this._handleRenderLoading(false, this._submitButton);
-  }
+  // removeLoader() {
+  //   this._handleRenderLoading(false);
+  // }
 }
 
 export default PopupWithForm;

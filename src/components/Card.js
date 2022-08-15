@@ -39,7 +39,12 @@ class Card {
   }
 
   _deleteCard() {
-    this._deleteCardFromServer(this._card._id, this._view);
+    this._deleteCardFromServer(this._card._id, this);
+  }
+
+  submitDeleteCard() {
+    this._view.remove();
+    this._view = null;
   }
 
   _checkOwner(template) {
